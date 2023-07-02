@@ -1,0 +1,38 @@
+<div class="card mx-5 my-5">
+    <div class="card-header">
+        <ul class="nav nav-pills card-header-pills">
+            <li class="nav-item" *ngIf="!conectado">
+                <input type="text" [(ngModel)]="mensaje.username" class="form-control" placeholder="Nombre" name="texto">
+            </li>
+            <li class="nav-item">
+                <button style="margin-left: 10px;" mat-raised-button color="basic" class="button-spacing" type="button" (click)="conectar()"
+                *ngIf="!conectado" [disabled]="!mensaje.username">Conectar</button>
+            </li>
+            <li class="nav-item">
+                <button style="margin-left: 10px;" mat-raised-button color="warn" class="button-spacing" type="button" (click)="desconectar()"
+                *ngIf="conectado">Cerrar chat</button>
+            </li>
+        </ul>
+    </div>
+    <div #scrollChat [scrollTop]="scrollChat.scrollHeight" class="card-body scroll" *ngIf="conectado">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item list-group-item-light" *ngFor="let mensaje of mensajes">
+                <!-- <span class="badge badge-primary">{{mensaje.usuario}}</span> -->
+                <span *ngIf="mensaje.tipo=='NUEVO_USUARIO'">{{ mensaje.fecha | date:'shortTime' }} : {{mensaje.texto}} <span [ngStyle]="{'color': mensaje.color}">{{mensaje.username}}</span></span>
+                <span *ngIf="mensaje.tipo=='MENSAJE'">{{ mensaje.fecha | date:'shortTime' }} : <span [ngStyle]="{'color': mensaje.color}">{{mensaje.username}}</span> <br> {{mensaje.texto}}</span>
+            </li>
+        </ul>
+    </div>
+    <div class="card-footer" *ngIf="conectado">
+        <form class="form-inline" style="display: flex; align-items: center;">
+          <div class="form-group mx-3" style="flex-grow: 1;">
+            <input type="text" [(ngModel)]="mensaje.texto" class="form-control" placeholder="Escribe un mensaje..." name="texto" style="margin-right: 10px;"
+            (keyup)="escribiendoMensaje()">
+          </div>
+          <button mat-raised-button color="primary" type="submit" (click)="enviarMensaje()">Enviar</button>
+        </form>
+        <div>
+            {{ escribiendo }}
+        </div>
+      </div>
+</div>

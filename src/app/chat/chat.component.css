@@ -1,0 +1,9 @@
+.scroll {
+    overflow-y: scroll;
+    height: 400px;
+}
+
+.button-spacing {
+    margin-right: 10px;
+}
+  
