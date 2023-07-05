@@ -29,7 +29,7 @@ export class ChatComponent implements OnInit {
     this.client = new Client();
 
     this.client.webSocketFactory = ()=>{
-      return new SockJS("http://localhost:8080/chat-websocket") as IStompSocket;
+      return new SockJS("https://chatapp-backend-production-0f01.up.railway.app/chat-websocket") as IStompSocket;
     }
  
     this.client.onConnect= (frame) => {
