@@ -46,7 +46,6 @@ export class ChatComponent implements OnInit {
         }
 
         this.mensajes.push(mensaje);
-        console.log(mensaje);
       });
 
 
